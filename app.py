@@ -34,6 +34,13 @@ def post_text(id):
         article = Article.query.get(id)
         return render_template("post-text.html", article=article)
 
+@app.route('/posts/deleteall')
+def deleteall():
+        articles = Article.query.all()
+        for article in articles:
+                db.session.delete(article)
+        db.session.commit()
+        return redirect('/posts')
 
 @app.route('/posts/<int:id>/delete')
 def post_delete(id):
